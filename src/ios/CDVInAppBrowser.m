@@ -362,6 +362,11 @@
     NSURL* url = request.URL;
     BOOL isTopLevelNavigation = [request.URL isEqual:[request mainDocumentURL]];
 
+	if ([url.scheme isEqualToString:@"tel:"])
+     	{
+        	[[UIApplication sharedApplication] openURL:url];
+        	return YES;
+     	}
     // See if the url uses the 'gap-iab' protocol. If so, the host should be the id of a callback to execute,
     // and the path, if present, should be a JSON-encoded value to pass to the callback.
     if ([[url scheme] isEqualToString:@"gap-iab"]) {
@@ -835,7 +840,13 @@
 - (BOOL)webView:(UIWebView*)theWebView shouldStartLoadWithRequest:(NSURLRequest*)request navigationType:(UIWebViewNavigationType)navigationType
 {
     BOOL isTopLevelNavigation = [request.URL isEqual:[request mainDocumentURL]];
-
+	NSURL* url = request.URL;
+	if ([url.scheme isEqualToString:@"tel:"])
+     	{
+        	[[UIApplication sharedApplication] openURL:url];
+        	return YES;
+     	}
+     	
     if (isTopLevelNavigation) {
         self.currentURL = request.URL;
     }
