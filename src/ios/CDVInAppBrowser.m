@@ -401,6 +401,9 @@
 
 - (void)webViewDidStartLoad:(UIWebView*)theWebView
 {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Loading" message:@"Load Start" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+    // optional - add more buttons:
+    [alert show];
     _injectedIframeBridge = NO;
 }
 
@@ -816,7 +819,10 @@
 - (void)webViewDidStartLoad:(UIWebView*)theWebView
 {
     // loading url, start spinner, update back/forward
-
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Loading" message:@"Load Start" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+    // optional - add more buttons:
+    [alert show];
+    
     self.addressLabel.text = NSLocalizedString(@"Loading...", nil);
     self.backButton.enabled = theWebView.canGoBack;
     self.forwardButton.enabled = theWebView.canGoForward;
